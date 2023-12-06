@@ -73,10 +73,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "AngularDashboard1:build:production"
+              "buildTarget": "AngularDashboard1:build:production"
             },
             "development": {
-              "browserTarget": "AngularDashboard1:build:development"
+              "buildTarget": "AngularDashboard1:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -84,7 +84,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "AngularDashboard1:build"
+            "buildTarget": "AngularDashboard1:build"
           }
         },
         "test": {
@@ -108,6 +108,5 @@
         }
       }
     }
-  },
-  "defaultProject": "AngularDashboard1"
+  }
 }
