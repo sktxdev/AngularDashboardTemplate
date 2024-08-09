@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "AngularDashboard1": {
+    "StudentPortal": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -20,7 +20,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/AngularDashboard1",
+            "outputPath": "dist/studentportal",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -73,10 +73,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "AngularDashboard1:build:production"
+              "browserTarget": "studentportal:build:production"
             },
             "development": {
-              "browserTarget": "AngularDashboard1:build:development"
+              "browserTarget": "studentportal:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -84,7 +84,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "AngularDashboard1:build"
+            "browserTarget": "studentportal:build"
           }
         },
         "test": {
@@ -108,5 +108,6 @@
         }
       }
     }
-  }
+  },
+  "defaultProject": "studentportal"
 }
