@@ -25,3 +25,16 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+
+
+nvm list:
+* 20.9.0 (Currently using 64-bit executable)
+  18.10.0
+  16.20.2
+
+node --version
+20.9.2
+
+npm --version
+10.1.0
+
