@@ -2,6 +2,14 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.0.3.
 
+SK - 12/21/2025 - Upgraded to Angular 19 with standalone components.
+SK - 12/21/2025 - Updated the UI to a cleaner look
+SK - 12/21/2025 - Added a screenshot to the README
+
+## Screenshot
+
+![Application Screenshot](./TemplateScreenshot.png)
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
@@ -37,4 +45,7 @@ node --version
 
 npm --version
 10.1.0
+
+## Screenshot
+
 
