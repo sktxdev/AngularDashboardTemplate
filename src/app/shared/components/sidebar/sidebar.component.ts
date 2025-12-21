@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
-import { MatButtonModule } from '@angular/material/button';
+import { RouterLink, RouterLinkActive } from '@angular/router';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-sidebar',
@@ -9,12 +9,20 @@ import { MatButtonModule } from '@angular/material/button';
   styleUrls: ['./sidebar.component.scss'],
   standalone: true,
   imports: [
-    MatSidenavModule,
+    CommonModule,
     MatIconModule,
-    MatButtonModule
+    RouterLink,
+    RouterLinkActive
   ]
 })
 export class SidebarComponent implements OnInit {
+  menuItems = [
+    { icon: 'home', label: 'Dashboard', route: '/' },
+    { icon: 'person', label: 'Users', route: '/users' },
+    { icon: 'event', label: 'Events', route: '/events' },
+    { icon: 'info', label: 'Admin', route: '/admin' },
+    { icon: 'info', label: 'About', route: '/about' },
+  ];
 
   constructor() { }
 

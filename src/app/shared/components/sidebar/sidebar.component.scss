@@ -1,39 +1,89 @@
-ul,li {
-    list-style: none;
-    list-style-position: outside;
-    margin: 5;
-    padding: 0;
+.mac-sidebar {
+  height: 100%;
+  background: linear-gradient(180deg, #f7f7f7 0%, #e8e8e8 100%);
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+  border-right: 1px solid #d1d1d1;
+  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.05);
 }
 
-ul {
-    counter-reset: foo;
-    display: table;
+.sidebar-header {
+  padding: 20px 16px;
+  border-bottom: 1px solid #d1d1d1;
+  background: rgba(255, 255, 255, 0.6);
+  
+  h2 {
+    margin: 0;
+    font-size: 15px;
+    font-weight: 600;
+    color: #333;
+    letter-spacing: -0.2px;
+  }
 }
 
-li {
-    list-style: none;
-    counter-increment: foo;
-    display: table-row;
+.sidebar-nav {
+  padding: 12px 8px;
 }
 
-li::before {
-    display: table-cell;
-    text-align: right;
-    padding-right: .3em;
+.nav-section {
+  margin-bottom: 20px;
+  
+  h3 {
+    font-size: 11px;
+    font-weight: 600;
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin: 0 0 8px 12px;
+  }
 }
 
-mat-sidenav-container {
-    background-color:darkslategray;
-    color: white;
+.nav-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
-a {
-    color: white;
-    text-decoration: none;
-    cursor: pointer;
+.nav-item {
+  display: flex;
+  align-items: center;
+  padding: 8px 12px;
+  margin: 2px 0;
+  border-radius: 6px;
+  text-decoration: none;
+  color: #333;
+  font-size: 14px;
+  font-weight: 400;
+  transition: all 0.15s ease;
+  cursor: pointer;
+  
+  &:hover {
+    background: rgba(0, 0, 0, 0.05);
+  }
+  
+  &.active {
+    background: rgba(0, 122, 255, 0.12);
+    color: #007aff;
+    font-weight: 500;
+    
+    .nav-icon {
+      color: #007aff;
+    }
+  }
 }
 
+.nav-icon {
+  width: 20px;
+  height: 20px;
+  font-size: 20px;
+  margin-right: 10px;
+  color: #666;
+  transition: color 0.15s ease;
+}
 
-mat-sidenav-container {
-    color: white;
+.nav-label {
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }

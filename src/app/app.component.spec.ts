@@ -6,11 +6,9 @@ describe('AppComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [
+        AppComponent,
         RouterTestingModule
-      ],
-      declarations: [
-        AppComponent
-      ],
+      ]
     }).compileComponents();
   });
 
@@ -20,10 +18,10 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'Student Portal'`, () => {
+  it(`should have as title 'Dashboard Demo'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('Student Portal');
+    expect(app.title).toEqual('Dashboard Demo');
   });
 
   // it('should render title', () => {
