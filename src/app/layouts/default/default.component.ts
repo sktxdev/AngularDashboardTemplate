@@ -12,7 +12,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
   standalone: true,
   imports: [
     RouterOutlet,
-    HeaderComponent,
+    // HeaderComponent,
     FooterComponent,
     SidebarComponent,
     MatSidenavModule

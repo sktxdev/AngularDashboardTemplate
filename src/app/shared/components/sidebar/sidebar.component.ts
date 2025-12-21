@@ -20,7 +20,7 @@ export class SidebarComponent implements OnInit {
     { icon: 'home', label: 'Dashboard', route: '/' },
     { icon: 'person', label: 'Users', route: '/users' },
     { icon: 'event', label: 'Events', route: '/events' },
-    { icon: 'info', label: 'Admin', route: '/admin' },
+    { icon: 'build', label: 'Admin', route: '/admin' },
     { icon: 'info', label: 'About', route: '/about' },
   ];
 
