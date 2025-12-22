@@ -20,6 +20,15 @@ SK - 12/21/2025 - Added a screenshot to the README
  node --version
   v18.19.1
 
+# Recommended versions for some systems
+
+npm install -g npm@11.7.0
+npm install -g @angular/cli
+ng build
+ng serve (or npm start)
+
+
+
 ```
 
 ## Screenshot
