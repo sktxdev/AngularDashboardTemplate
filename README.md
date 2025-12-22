@@ -6,6 +6,22 @@ SK - 12/21/2025 - Upgraded to Angular 19 with standalone components.
 SK - 12/21/2025 - Updated the UI to a cleaner look
 SK - 12/21/2025 - Added a screenshot to the README
 
+## Make sure you have the right versions of node and npm. Recommend using nvm to manage versions
+
+``` bash
+ nvm list
+
+  * 18.19.1 (Currently using 64-bit executable)
+    18.18.1
+
+ npm --version
+  10.2.4
+
+ node --version
+  v18.19.1
+
+```
+
 ## Screenshot
 
 ![Application Screenshot](./TemplateScreenshot.png)
