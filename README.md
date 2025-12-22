@@ -71,6 +71,14 @@ node --version
 npm --version
 10.1.0
 
-## Screenshot
+## Electron version
+
+``` bash
+npm install --save-dev electron electron-builder
+npm install --save-dev wait-on concurrently
+```
+
+
+
 
 
