@@ -129,6 +129,26 @@ body.theme-dark {
       }
     }
   }
+
+  // Generic content styling for all pages
+  .roles-container,
+  .permissions-container,
+  .dashboard-container,
+  .events-container,
+  .users-container,
+  mat-drawer-content {
+    h1, h2, h3, h4, h5, h6 {
+      color: #e0e0e0 !important;
+    }
+
+    p, span, div {
+      color: #e0e0e0 !important;
+    }
+
+    label {
+      color: #e0e0e0 !important;
+    }
+  }
 }
 
 body.theme-dracula {
@@ -245,6 +265,26 @@ body.theme-dracula {
       p {
         color: #6272a4 !important;
       }
+    }
+  }
+
+  // Generic content styling for all pages
+  .roles-container,
+  .permissions-container,
+  .dashboard-container,
+  .events-container,
+  .users-container,
+  mat-drawer-content {
+    h1, h2, h3, h4, h5, h6 {
+      color: #f8f8f2 !important;
+    }
+
+    p, span, div {
+      color: #f8f8f2 !important;
+    }
+
+    label {
+      color: #f8f8f2 !important;
     }
   }
 }
