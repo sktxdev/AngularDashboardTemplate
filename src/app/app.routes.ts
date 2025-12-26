@@ -5,7 +5,7 @@ import { UsersComponent } from './features/users/users.component';
 import { EventsComponent } from './features/events/events.component';
 import { AboutComponent } from './features/about/about.component';
 import { AdminComponent } from './features/admin/admin.component';
-import { SettingsComponent } from './features/admin/settings/settings.component';
+import { SettingsComponent } from './features/settings/settings.component';
 import { RolesComponent } from './features/admin/roles/roles.component';
 import { PermissionsComponent } from './features/admin/permissions/permissions.component';
 import { ContactComponent } from './features/about/contact/contact.component';
@@ -55,8 +55,11 @@ export const routes: Routes = [
       {
         path: 'about/software',
         component: SoftwareComponent
+      },
+      {
+        path: 'settings',
+        component: SettingsComponent
       }
-
     ]
   }
 ];
