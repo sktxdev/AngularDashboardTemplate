@@ -17,37 +17,43 @@ import { CommonModule } from '@angular/common';
 })
 export class SidebarComponent implements OnInit {
   expandedItems: { [key: string]: boolean } = {};
+  expandedSubItems: { [key: string]: boolean } = {};
 
   menuItems = [
-    { 
+    {
       icon: 'home', label: 'Dashboard', route: '/',
       children: []
     },
-    { 
-      icon: 'person', label: 'Users', route: '', 
+    {
+      icon: 'person', label: 'Users', route: '',
       children: [
         { icon: 'person', label: 'UserSubMenu1', route: '/users' },
         { icon: 'person', label: 'UserSubMenu2', route: '/users' },
-        { icon: 'person', label: 'UserSubMenu3', route: '/users' },
+        { icon: 'person', label: 'UserSubMenu3', route: '', children:
+          [
+            { icon: 'person', label: 'UserSubMenu3-1', route: '/users' },
+            { icon: 'person', label: 'UserSubMenu3-2', route: '/users' },
+          ]
+        },
       ]
     },
-    { 
-      icon: 'event', label: 'Events', route: '', 
+    {
+      icon: 'event', label: 'Events', route: '',
       children: [
         { icon: 'person', label: 'EventsSubMenu1', route: '/events' },
         { icon: 'person', label: 'EventsSubMenu2', route: '/events' },
         { icon: 'person', label: 'EventsSubMenu3', route: '/events' },
       ]
     },
-    { 
-      icon: 'build', label: 'Admin', route: '', 
+    {
+      icon: 'build', label: 'Admin', route: '',
       children: [
         { icon: 'person', label: 'Settings', route: '/admin/settings' },
         { icon: 'person', label: 'Roles', route: '/admin/roles' },
         { icon: 'person', label: 'Permissions', route: '/admin/permissions' },
       ]
     },
-    { 
+    {
       icon: 'info', label: 'About', route: '',
       children: [
         { icon: 'person', label: 'Contact', route: '/about/contact' },
@@ -63,18 +69,37 @@ export class SidebarComponent implements OnInit {
 
   toggleSubmenu(label: string): void {
     const wasExpanded = this.expandedItems[label];
-    
+
     // Collapse all menus
     Object.keys(this.expandedItems).forEach(key => {
       this.expandedItems[key] = false;
     });
-    
+
     // Toggle the clicked menu (expand if it was closed, keep closed if it was open)
     this.expandedItems[label] = !wasExpanded;
+
+    // Collapse all third-level items when closing parent
+    if (!this.expandedItems[label]) {
+      Object.keys(this.expandedSubItems).forEach(key => {
+        if (key.startsWith(label + '-')) {
+          this.expandedSubItems[key] = false;
+        }
+      });
+    }
   }
 
   isExpanded(label: string): boolean {
     return this.expandedItems[label] || false;
+  }
+
+  toggleThirdLevel(parentLabel: string, childLabel: string): void {
+    const key = `${parentLabel}-${childLabel}`;
+    this.expandedSubItems[key] = !this.expandedSubItems[key];
+  }
+
+  isThirdLevelExpanded(parentLabel: string, childLabel: string): boolean {
+    const key = `${parentLabel}-${childLabel}`;
+    return this.expandedSubItems[key] || false;
   }
 
 }
