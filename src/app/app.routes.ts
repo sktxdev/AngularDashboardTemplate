@@ -10,6 +10,9 @@ import { RolesComponent } from './features/admin/roles/roles.component';
 import { PermissionsComponent } from './features/admin/permissions/permissions.component';
 import { ContactComponent } from './features/about/contact/contact.component';
 import { SoftwareComponent } from './features/about/software/software.component';
+import { EventsSubmenu2Component } from './features/events/events-submenu-2/events-submenu-2.component';
+import { EventsSubmenu1Component } from './features/events/events-submenu-1/events-submenu-1.component';
+import { EventsSubmenu3Component } from './features/events/events-submenu-3/events-submenu-3.component';
 
 export const routes: Routes = [
   {
@@ -25,9 +28,50 @@ export const routes: Routes = [
         component: EventsComponent
       },
       {
+        path: 'events/submenu1',
+        component: EventsSubmenu1Component
+      },
+      {
+        path: 'events/submenu2',
+        component: EventsSubmenu2Component
+      },
+      {
+        path: 'events/submenu3',
+        component: EventsSubmenu3Component
+      },
+      {
         path: 'users',
         component: UsersComponent
       },
+      {
+        path: 'users/submenu.1',
+        component: UsersComponent
+      },
+      {
+        path: 'users/submenu.2',
+        component: UsersComponent
+      },
+      {
+        path: 'users/Level5-Item1',
+        component: UsersComponent
+      },
+      {
+        path: 'users/Level6-Item1',
+        component: UsersComponent
+      },
+      {
+        path: 'users/Level6-Item2',
+        component: UsersComponent
+      },
+      {
+        path: 'users/submenu.3.1.2',
+        component: UsersComponent
+      },
+      {
+        path: 'users/submenu.3.2',
+        component: UsersComponent
+      },
+
       {
         path: 'admin',
         component: AdminComponent
