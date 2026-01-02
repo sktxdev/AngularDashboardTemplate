@@ -35,15 +35,15 @@ ng serve (or npm start)
 
 ### Light
 
-![Application Screenshot](./TemplateScreenshot-Light.png)
+![Application Screenshot](./TemplateScreenshot-light.png)
 
 ### Dark
 
-![Application Screenshot](./TemplateScreenshot-Dark.png)
+![Application Screenshot](./TemplateScreenshot-dark.png)
 
 ### Dracula
 
-![Application Screenshot](./TemplateScreenshot-Dracula.png)
+![Application Screenshot](./TemplateScreenshot-dracula.png)
 
 ## Development server
 
