@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener, ElementRef } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
-import { RouterLink, RouterLinkActive } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { MenuItemComponent, MenuItem } from './menu-item/menu-item.component';
 
 @Component({
   selector: 'app-sidebar',
@@ -11,31 +11,24 @@ import { CommonModule } from '@angular/common';
   imports: [
     CommonModule,
     MatIconModule,
-    RouterLink,
-    RouterLinkActive
+    MenuItemComponent
   ]
 })
 export class SidebarComponent implements OnInit {
-  expandedItems: { [key: string]: boolean } = {};
-  expandedSubItems: { [key: string]: boolean } = {};
+  private readonly STORAGE_KEY = 'angularDashboardTemplate.currentNavWidth';
+  private readonly MIN_WIDTH = 150;
+  private readonly MAX_WIDTH = 500;
+  private readonly DEFAULT_WIDTH = 250;
 
-  menuItems = [
+  sidebarWidth: number = this.DEFAULT_WIDTH;
+  isResizing: boolean = false;
+  private startX: number = 0;
+  private startWidth: number = 0;
+
+  menuItems: MenuItem[] = [
     {
       icon: 'home', label: 'Dashboard', route: '/',
       children: []
-    },
-    {
-      icon: 'person', label: 'Users', route: '',
-      children: [
-        { icon: 'person', label: 'UserSubMenu1', route: '/users' },
-        { icon: 'person', label: 'UserSubMenu2', route: '/users' },
-        { icon: 'person', label: 'UserSubMenu3', route: '', children:
-          [
-            { icon: 'person', label: 'UserSubMenu3-1', route: '/users' },
-            { icon: 'person', label: 'UserSubMenu3-2', route: '/users' },
-          ]
-        },
-      ]
     },
     {
       icon: 'event', label: 'Events', route: '',
@@ -51,6 +44,34 @@ export class SidebarComponent implements OnInit {
         { icon: 'person', label: 'Settings', route: '/admin/settings' },
         { icon: 'person', label: 'Roles', route: '/admin/roles' },
         { icon: 'person', label: 'Permissions', route: '/admin/permissions' },
+        {
+          icon: 'person', label: 'Users', route: '',
+          children: [
+            { icon: 'person', label: 'UserSubMenu1', route: '/users' },
+            { icon: 'person', label: 'UserSubMenu2', route: '/users' },
+            { icon: 'person', label: 'UserSubMenu3', route: '', children:
+              [
+                { icon: 'person', label: 'UserSubMenu3-1', route: '', children:
+                  [
+                    { icon: 'person', label: 'UserSubMenu3-1-1', route: '', children:
+                      [
+                        { icon: 'person', label: 'Level5-Item1', route: '/users' },
+                        { icon: 'person', label: 'Level5-Item2', route: '', children:
+                          [
+                            { icon: 'person', label: 'Level6-Item1', route: '/users' },
+                            { icon: 'person', label: 'Level6-Item2', route: '/users' },
+                          ]
+                        },
+                      ]
+                    },
+                    { icon: 'person', label: 'UserSubMenu3-1-2', route: '/users' },
+                  ]
+                },
+                { icon: 'person', label: 'UserSubMenu3-2', route: '/users' },
+              ]
+            },
+          ]
+        },
       ]
     },
     {
@@ -62,44 +83,62 @@ export class SidebarComponent implements OnInit {
     },
   ];
 
-  constructor() { }
+  constructor(private elementRef: ElementRef) { }
 
   ngOnInit(): void {
+    // Load saved width from localStorage
+    const savedWidth = localStorage.getItem(this.STORAGE_KEY);
+    if (savedWidth) {
+      const width = parseInt(savedWidth, 10);
+      if (width >= this.MIN_WIDTH && width <= this.MAX_WIDTH) {
+        this.sidebarWidth = width;
+      }
+    }
+    this.updateSidebarWidth();
   }
 
-  toggleSubmenu(label: string): void {
-    const wasExpanded = this.expandedItems[label];
+  onResizeHandleMouseDown(event: MouseEvent): void {
+    event.preventDefault();
+    this.isResizing = true;
+    this.startX = event.clientX;
+    this.startWidth = this.sidebarWidth;
+    document.body.classList.add('resizing');
+  }
 
-    // Collapse all menus
-    Object.keys(this.expandedItems).forEach(key => {
-      this.expandedItems[key] = false;
-    });
+  @HostListener('document:mousemove', ['$event'])
+  onMouseMove(event: MouseEvent): void {
+    if (!this.isResizing) return;
 
-    // Toggle the clicked menu (expand if it was closed, keep closed if it was open)
-    this.expandedItems[label] = !wasExpanded;
+    const delta = event.clientX - this.startX;
+    const newWidth = this.startWidth + delta;
 
-    // Collapse all third-level items when closing parent
-    if (!this.expandedItems[label]) {
-      Object.keys(this.expandedSubItems).forEach(key => {
-        if (key.startsWith(label + '-')) {
-          this.expandedSubItems[key] = false;
-        }
-      });
+    if (newWidth >= this.MIN_WIDTH && newWidth <= this.MAX_WIDTH) {
+      this.sidebarWidth = newWidth;
+      this.updateSidebarWidth();
     }
   }
 
-  isExpanded(label: string): boolean {
-    return this.expandedItems[label] || false;
+  @HostListener('document:mouseup')
+  onMouseUp(): void {
+    if (this.isResizing) {
+      this.isResizing = false;
+      document.body.classList.remove('resizing');
+      // Save to localStorage
+      localStorage.setItem(this.STORAGE_KEY, this.sidebarWidth.toString());
+    }
   }
 
-  toggleThirdLevel(parentLabel: string, childLabel: string): void {
-    const key = `${parentLabel}-${childLabel}`;
-    this.expandedSubItems[key] = !this.expandedSubItems[key];
-  }
+  private updateSidebarWidth(): void {
+    const sidebarElement = this.elementRef.nativeElement.querySelector('.mac-sidebar');
+    if (sidebarElement) {
+      sidebarElement.style.width = `${this.sidebarWidth}px`;
+    }
 
-  isThirdLevelExpanded(parentLabel: string, childLabel: string): boolean {
-    const key = `${parentLabel}-${childLabel}`;
-    return this.expandedSubItems[key] || false;
+    // Update the mat-drawer width as well
+    const drawer = this.elementRef.nativeElement.closest('mat-drawer');
+    if (drawer) {
+      drawer.style.width = `${this.sidebarWidth}px`;
+    }
   }
 
 }

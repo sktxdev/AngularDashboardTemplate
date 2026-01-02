@@ -1,10 +1,50 @@
 .mac-sidebar {
   height: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
   background: linear-gradient(180deg, #f7f7f7 0%, #e8e8e8 100%);
   padding: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
   border-right: 1px solid #d1d1d1;
   box-shadow: 2px 0 8px rgba(0, 0, 0, 0.05);
+  position: relative;
+  user-select: none;
+  overflow-x: hidden;
+  overflow-y: auto;
+
+  /* Hide scrollbar for Chrome, Safari and Opera */
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Hide scrollbar for IE, Edge and Firefox */
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+.resize-handle {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 6px;
+  height: 100%;
+  cursor: ew-resize;
+  z-index: 1000;
+  background: transparent;
+  transition: background-color 0.2s ease;
+
+  &:hover {
+    background-color: rgba(0, 122, 255, 0.2);
+  }
+
+  &.resizing {
+    background-color: rgba(0, 122, 255, 0.3);
+  }
+}
+
+body.resizing {
+  cursor: ew-resize !important;
+  user-select: none !important;
 }
 
 .sidebar-header {
@@ -42,7 +82,12 @@
   list-style: none;
   padding: 0;
   margin: 0;
+
+  li {
+    list-style: none;
+  }
 }
+
 
 .nav-item {
   display: flex;
@@ -155,6 +200,14 @@
     background: rgba(0, 122, 255, 0.06);
   }
 
+  &.has-children {
+    cursor: pointer;
+
+    &:hover {
+      background: rgba(0, 0, 0, 0.05);
+    }
+  }
+
   .nav-icon {
     width: 16px;
     height: 16px;
@@ -167,6 +220,39 @@
   width: 18px;
   height: 18px;
   font-size: 18px;
+}
+
+.fourth-level-list {
+  list-style: none;
+  padding: 0;
+  margin: 2px 0 4px 0;
+  animation: slideDown 0.2s ease-out;
+}
+
+.fourth-level-item {
+  padding: 4px 12px 4px 82px;
+  font-size: 11px;
+
+  &:hover {
+    background: rgba(0, 0, 0, 0.02);
+  }
+
+  &.active {
+    background: rgba(0, 122, 255, 0.05);
+  }
+
+  .nav-icon {
+    width: 14px;
+    height: 14px;
+    font-size: 14px;
+    margin-right: 6px;
+  }
+}
+
+.fourth-level-icon {
+  width: 16px;
+  height: 16px;
+  font-size: 16px;
 }
 
 .nav-icon {

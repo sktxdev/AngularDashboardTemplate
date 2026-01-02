@@ -8,51 +8,14 @@
       <h3>Navigation</h3>
       <ul class="nav-list">
         <li *ngFor="let item of menuItems">
-          <a
-            [routerLink]="item.children && item.children.length > 0 ? null : item.route"
-            (click)="item.children && item.children.length > 0 ? toggleSubmenu(item.label) : null"
-            routerLinkActive="active"
-            [routerLinkActiveOptions]="{exact: true}"
-            class="nav-item"
-            [class.has-children]="item.children && item.children.length > 0">
-            <mat-icon class="nav-icon">{{ item.icon }}</mat-icon>
-            <span class="nav-label">{{ item.label }}</span>
-            <mat-icon *ngIf="item.children && item.children.length > 0" class="expand-icon">
-              {{ isExpanded(item.label) ? 'expand_less' : 'expand_more' }}
-            </mat-icon>
-          </a>
-
-          <ul *ngIf="item.children && item.children.length > 0 && isExpanded(item.label)" class="submenu-list">
-            <li *ngFor="let child of item.children">
-              <a
-                [routerLink]="child.children && child.children.length > 0 ? null : child.route"
-                (click)="child.children && child.children.length > 0 ? toggleThirdLevel(item.label, child.label) : null"
-                routerLinkActive="active"
-                [routerLinkActiveOptions]="{exact: true}"
-                class="nav-item submenu-item"
-                [class.has-children]="child.children && child.children.length > 0">
-                <mat-icon class="nav-icon">{{ child.icon }}</mat-icon>
-                <span class="nav-label">{{ child.label }}</span>
-                <mat-icon *ngIf="child.children && child.children.length > 0" class="expand-icon third-level-icon">
-                  {{ isThirdLevelExpanded(item.label, child.label) ? 'expand_less' : 'expand_more' }}
-                </mat-icon>
-              </a>
-
-              <ul *ngIf="child.children && child.children.length > 0 && isThirdLevelExpanded(item.label, child.label)" class="third-level-list">
-                <li *ngFor="let grandchild of child.children">
-                  <a
-                    [routerLink]="grandchild.route"
-                    routerLinkActive="active"
-                    class="nav-item third-level-item">
-                    <mat-icon class="nav-icon">{{ grandchild.icon }}</mat-icon>
-                    <span class="nav-label">{{ grandchild.label }}</span>
-                  </a>
-                </li>
-              </ul>
-            </li>
-          </ul>
+          <app-menu-item [item]="item" [level]="0"></app-menu-item>
         </li>
       </ul>
     </div>
   </nav>
+
+  <div class="resize-handle"
+       (mousedown)="onResizeHandleMouseDown($event)"
+       [class.resizing]="isResizing">
+  </div>
 </div>
