@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 
 @Component({
@@ -8,6 +8,20 @@ import { RouterOutlet } from '@angular/router';
   standalone: true,
   imports: [RouterOutlet]
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'Dashboard Demo';
+
+  ngOnInit(): void {
+    // Initialize theme on app launch/reload
+    const savedTheme = localStorage.getItem('angularDashboardTemplate.selectedTheme');
+    const themeToApply = savedTheme || 'dracula';
+    this.applyTheme(themeToApply);
+  }
+
+  private applyTheme(themeId: string): void {
+    // Remove all theme classes
+    document.body.classList.remove('theme-light', 'theme-dark', 'theme-dracula');
+    // Add selected theme class
+    document.body.classList.add(`theme-${themeId}`);
+  }
 }

@@ -16,23 +16,23 @@ export class SettingsComponent implements OnInit {
     { id: 'dracula', name: 'Dracula', description: 'VSCode Dracula theme inspired' }
   ];
 
-  selectedTheme: string = 'light';
+  selectedTheme: string = 'dracula';
 
   constructor() { }
 
   ngOnInit(): void {
     // Load saved theme from localStorage
-    const savedTheme = localStorage.getItem('theme');
+    const savedTheme = localStorage.getItem('angularDashboardTemplate.selectedTheme');
     if (savedTheme) {
       this.selectedTheme = savedTheme;
-      this.applyTheme(savedTheme);
     }
+    // Theme is already applied by AppComponent on launch
   }
 
   selectTheme(themeId: string): void {
     this.selectedTheme = themeId;
     this.applyTheme(themeId);
-    localStorage.setItem('theme', themeId);
+    localStorage.setItem('angularDashboardTemplate.selectedTheme', themeId);
   }
 
   onThemeChange(event: Event): void {
