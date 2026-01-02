@@ -55,10 +55,6 @@ export const routes: Routes = [
       {
         path: 'about/software',
         component: SoftwareComponent
-      },
-      {
-        path: 'settings',
-        component: SettingsComponent
       }
     ]
   }

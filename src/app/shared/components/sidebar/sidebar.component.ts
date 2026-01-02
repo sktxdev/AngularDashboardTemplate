@@ -60,11 +60,6 @@ export class SidebarComponent implements OnInit {
         { icon: 'person', label: 'Software', route: '/about/software' },
       ]
     },
-    {
-      icon: 'settings', label: 'Settings', route: '/settings',
-      children: []
-    },
-
   ];
 
   constructor() { }
