@@ -138,7 +138,12 @@ export class SidebarComponent implements OnInit {
     const drawer = this.elementRef.nativeElement.closest('mat-drawer');
     if (drawer) {
       drawer.style.width = `${this.sidebarWidth}px`;
+      drawer.style.minWidth = `${this.sidebarWidth}px`;
+      drawer.style.maxWidth = `${this.sidebarWidth}px`;
     }
+
+    // Trigger a window resize event to make mat-drawer-container recalculate layout
+    window.dispatchEvent(new Event('resize'));
   }
 
 }
