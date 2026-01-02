@@ -31,9 +31,19 @@ ng serve (or npm start)
 
 ```
 
-## Screenshot
+## Screenshots
 
-![Application Screenshot](./TemplateScreenshot.png)
+### Light
+
+![Application Screenshot](./TemplateScreenshot-Light.png)
+
+### Dark
+
+![Application Screenshot](./TemplateScreenshot-Dark.png)
+
+### Dracula
+
+![Application Screenshot](./TemplateScreenshot-Dracula.png)
 
 ## Development server
 
@@ -77,8 +87,3 @@ npm --version
 npm install --save-dev electron electron-builder
 npm install --save-dev wait-on concurrently
 ```
-
-
-
-
-
