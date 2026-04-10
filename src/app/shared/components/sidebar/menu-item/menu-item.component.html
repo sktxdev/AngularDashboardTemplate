@@ -9,17 +9,23 @@
   [style.font-size]="getFontSize()">
   <mat-icon class="nav-icon" [style.font-size]="getIconSize()" [style.width]="getIconSize()" [style.height]="getIconSize()">{{ item.icon }}</mat-icon>
   <span class="nav-label">{{ item.label }}</span>
-  <mat-icon *ngIf="hasChildren(item)" class="expand-icon">
-    {{ isExpanded(getMenuKey(item.label)) ? 'expand_less' : 'expand_more' }}
-  </mat-icon>
+  @if (hasChildren(item)) {
+    <mat-icon class="expand-icon">
+      {{ isExpanded(getMenuKey(item.label)) ? 'expand_less' : 'expand_more' }}
+    </mat-icon>
+  }
 </a>
 
-<ul *ngIf="hasChildren(item) && isExpanded(getMenuKey(item.label))" class="submenu-list">
-  <li *ngFor="let child of item.children">
-    <app-menu-item
-      [item]="child"
-      [level]="level + 1"
-      [path]="getMenuKey(item.label)">
-    </app-menu-item>
-  </li>
-</ul>
+@if (hasChildren(item) && isExpanded(getMenuKey(item.label))) {
+  <ul class="submenu-list">
+    @for (child of item.children; track child) {
+      <li>
+        <app-menu-item
+          [item]="child"
+          [level]="level + 1"
+          [path]="getMenuKey(item.label)">
+        </app-menu-item>
+      </li>
+    }
+  </ul>
+}

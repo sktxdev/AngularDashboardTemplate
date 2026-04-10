@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { MatIconModule } from '@angular/material/icon';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 
@@ -16,11 +16,10 @@ export interface MenuItem {
   styleUrls: ['./menu-item.component.scss'],
   standalone: true,
   imports: [
-    CommonModule,
     MatIconModule,
     RouterLink,
     RouterLinkActive
-  ]
+]
 })
 export class MenuItemComponent {
   @Input() item!: MenuItem;

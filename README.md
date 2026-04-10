@@ -9,27 +9,19 @@ SK - 12/21/2025 - Added a screenshot to the README
 ## Make sure you have the right versions of node and npm. Recommend using nvm to manage versions
 
 ``` bash
- nvm list
-
-  * 18.19.1 (Currently using 64-bit executable)
-    18.18.1
 
  npm --version
-  10.2.4
+  10.9.0
 
  node --version
-  v18.19.1
+  v22.12.0
 
-# Recommended versions for some systems
+ $ng --version
+  21.2.7
 
-npm install -g npm@11.7.0
-npm install -g @angular/cli
-ng build
-ng serve (or npm start)
-
-
-
-```
+ $nvm list
+  v22.12.0
+````
 
 ## Screenshots
 
@@ -68,18 +60,6 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
-
-
-nvm list:
-* 20.9.0 (Currently using 64-bit executable)
-  18.10.0
-  16.20.2
-
-node --version
-20.9.2
-
-npm --version
-10.1.0
 
 ## Electron version
 

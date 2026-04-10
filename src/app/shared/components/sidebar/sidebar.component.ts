@@ -1,6 +1,6 @@
 import { Component, OnInit, HostListener, ElementRef } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
-import { CommonModule } from '@angular/common';
+
 import { MenuItemComponent, MenuItem } from './menu-item/menu-item.component';
 
 @Component({
@@ -9,10 +9,9 @@ import { MenuItemComponent, MenuItem } from './menu-item/menu-item.component';
   styleUrls: ['./sidebar.component.scss'],
   standalone: true,
   imports: [
-    CommonModule,
     MatIconModule,
     MenuItemComponent
-  ]
+]
 })
 export class SidebarComponent implements OnInit {
   private readonly STORAGE_KEY = 'angularDashboardTemplate.currentNavWidth';

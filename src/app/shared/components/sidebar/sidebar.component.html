@@ -7,15 +7,17 @@
     <div class="nav-section">
       <h3>Navigation</h3>
       <ul class="nav-list">
-        <li *ngFor="let item of menuItems">
-          <app-menu-item [item]="item" [level]="0"></app-menu-item>
-        </li>
+        @for (item of menuItems; track item) {
+          <li>
+            <app-menu-item [item]="item" [level]="0"></app-menu-item>
+          </li>
+        }
       </ul>
     </div>
   </nav>
 
   <div class="resize-handle"
-       (mousedown)="onResizeHandleMouseDown($event)"
-       [class.resizing]="isResizing">
+    (mousedown)="onResizeHandleMouseDown($event)"
+    [class.resizing]="isResizing">
   </div>
 </div>

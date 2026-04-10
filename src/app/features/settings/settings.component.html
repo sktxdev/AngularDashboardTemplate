@@ -12,31 +12,36 @@
         class="theme-dropdown"
         [(ngModel)]="selectedTheme"
         (change)="onThemeChange($event)">
-        <option *ngFor="let theme of themes" [value]="theme.id">
-          {{ theme.name }} - {{ theme.description }}
-        </option>
+        @for (theme of themes; track theme) {
+          <option [value]="theme.id">
+            {{ theme.name }} - {{ theme.description }}
+          </option>
+        }
       </select>
     </div>
 
     <div class="theme-selector">
-      <div
-        *ngFor="let theme of themes"
-        class="theme-card"
-        [class.selected]="selectedTheme === theme.id"
-        (click)="selectTheme(theme.id)">
-        <div class="theme-preview" [class]="'preview-' + theme.id">
-          <div class="preview-header"></div>
-          <div class="preview-sidebar"></div>
-          <div class="preview-content"></div>
+      @for (theme of themes; track theme) {
+        <div
+          class="theme-card"
+          [class.selected]="selectedTheme === theme.id"
+          (click)="selectTheme(theme.id)">
+          <div class="theme-preview" [class]="'preview-' + theme.id">
+            <div class="preview-header"></div>
+            <div class="preview-sidebar"></div>
+            <div class="preview-content"></div>
+          </div>
+          <div class="theme-info">
+            <h4>{{ theme.name }}</h4>
+            <p>{{ theme.description }}</p>
+          </div>
+          @if (selectedTheme === theme.id) {
+            <div class="theme-check">
+              <span>✓</span>
+            </div>
+          }
         </div>
-        <div class="theme-info">
-          <h4>{{ theme.name }}</h4>
-          <p>{{ theme.description }}</p>
-        </div>
-        <div class="theme-check" *ngIf="selectedTheme === theme.id">
-          <span>✓</span>
-        </div>
-      </div>
+      }
     </div>
   </section>
 </div>

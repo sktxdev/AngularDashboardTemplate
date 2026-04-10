@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { FormsModule } from '@angular/forms';
 
 @Component({
@@ -7,7 +7,7 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './settings.component.html',
   styleUrls: ['./settings.component.scss'],
   standalone: true,
-  imports: [CommonModule, FormsModule]
+  imports: [FormsModule]
 })
 export class SettingsComponent implements OnInit {
   themes = [
