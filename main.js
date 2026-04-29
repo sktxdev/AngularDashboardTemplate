@@ -1,4 +1,4 @@
-const { app, BrowserWindow } = require('electron');
+const { app, BrowserWindow, globalShortcut, session } = require('electron');
 const path = require('path');
 const url = require('url');
 let mainWindow;
@@ -24,7 +24,7 @@ function createWindow() {
   //mainWindow.loadFile("dist/angulardashboard1/browser/index.html");
 
     // Open the DevTools (optional)
-  mainWindow.webContents.openDevTools();
+  // mainWindow.webContents.openDevTools();
 
   // Production
   // mainWindow.loadFile(path.join(__dirname, 'dist/angulardashboard1/browser/index.html'));
@@ -32,12 +32,33 @@ function createWindow() {
   mainWindow.on('closed', () => mainWindow = null);
 }
 
-app.on('ready', createWindow);
+app.whenReady().then(() => {
+    createWindow();
+
+    // Only enable DevTools in development
+    if (process.env.NODE_ENV !== 'production') {
+        // Your F12 toggle code
+        globalShortcut.register('F12', () => {
+          if (mainWindow && mainWindow.webContents) {
+              if (mainWindow.webContents.isDevToolsOpened()) {
+                  mainWindow.webContents.closeDevTools();
+              } else {
+                  mainWindow.webContents.openDevTools();
+              }
+          }
+        });
+    }
+    // Register F12 to toggle DevTools
+
+});
 
 app.on('window-all-closed', () => {
-  if (process.platform !== 'darwin') {
-    app.quit();
-  }
+    // Unregister all global shortcuts
+    globalShortcut.unregisterAll();
+
+    if (process.platform !== 'darwin') {
+        app.quit();
+    }
 });
 
 // Create a new window when the app is activated (e.g., clicking the Dock icon on macOS)
