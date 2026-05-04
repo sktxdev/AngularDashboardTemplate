@@ -6,7 +6,7 @@
     font-size: 28px;
     font-weight: 600;
     margin-bottom: 30px;
-    color: #333;
+    color: var(--text-primary, #333333);
   }
 }
 
@@ -17,11 +17,11 @@
     font-size: 20px;
     font-weight: 600;
     margin-bottom: 8px;
-    color: #333;
+    color: var(--text-primary, #333333);
   }
 
   .section-description {
-    color: #666;
+    color: var(--text-secondary, #666666);
     margin-bottom: 20px;
   }
 }
@@ -35,7 +35,7 @@
   .theme-label {
     font-size: 16px;
     font-weight: 500;
-    color: #333;
+    color: var(--text-primary, #333333);
     min-width: 120px;
   }
 
@@ -44,25 +44,27 @@
     max-width: 400px;
     padding: 10px 16px;
     font-size: 15px;
-    border: 2px solid #d1d1d1;
+    border: 2px solid var(--border-color, #d1d1d1);
     border-radius: 8px;
-    background-color: #fff;
-    color: #333;
+    background-color: var(--bg-primary, #ffffff);
+    color: var(--text-primary, #333333);
     cursor: pointer;
     transition: all 0.2s ease;
     outline: none;
 
     &:hover {
-      border-color: #007aff;
+      border-color: var(--accent-color, #007aff);
     }
 
     &:focus {
-      border-color: #007aff;
+      border-color: var(--accent-color, #007aff);
       box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.1);
     }
 
     option {
       padding: 8px;
+      background-color: var(--bg-primary, #ffffff);
+      color: var(--text-primary, #333333);
     }
   }
 }
@@ -74,22 +76,22 @@
 }
 
 .theme-card {
-  border: 2px solid #e0e0e0;
+  border: 2px solid var(--border-color, #e0e0e0);
   border-radius: 12px;
   padding: 16px;
   cursor: pointer;
   transition: all 0.3s ease;
-  background: #fff;
+  background: var(--bg-primary, #ffffff);
   position: relative;
 
   &:hover {
-    border-color: #007aff;
+    border-color: var(--accent-color, #007aff);
     box-shadow: 0 4px 12px rgba(0, 122, 255, 0.15);
     transform: translateY(-2px);
   }
 
   &.selected {
-    border-color: #007aff;
+    border-color: var(--accent-color, #007aff);
     background: rgba(0, 122, 255, 0.05);
     box-shadow: 0 4px 16px rgba(0, 122, 255, 0.2);
   }
@@ -101,6 +103,7 @@
   border-radius: 8px;
   overflow: hidden;
   margin-bottom: 12px;
+  background: var(--preview-bg, #f5f5f5);
   display: grid;
   grid-template-columns: 60px 1fr;
   grid-template-rows: 30px 1fr;
@@ -108,63 +111,53 @@
 
   .preview-header {
     grid-column: 1 / -1;
+    background: linear-gradient(
+      135deg,
+      var(--preview-header-start, #667eea) 0%,
+      var(--preview-header-end, #764ba2) 100%
+    );
   }
 
   .preview-sidebar {
     grid-row: 2;
+    background: linear-gradient(
+      180deg,
+      var(--preview-sidebar-start, #f7f7f7) 0%,
+      var(--preview-sidebar-end, #e8e8e8) 100%
+    );
   }
 
   .preview-content {
     grid-row: 2;
+    background: var(--preview-content-bg, #ffffff);
   }
 }
 
 .preview-light {
-  background: #f5f5f5;
-
-  .preview-header {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  }
-
-  .preview-sidebar {
-    background: linear-gradient(180deg, #f7f7f7 0%, #e8e8e8 100%);
-  }
-
-  .preview-content {
-    background: #ffffff;
-  }
+  --preview-bg: #f5f5f5;
+  --preview-header-start: #667eea;
+  --preview-header-end: #764ba2;
+  --preview-sidebar-start: #f7f7f7;
+  --preview-sidebar-end: #e8e8e8;
+  --preview-content-bg: #ffffff;
 }
 
 .preview-dark {
-  background: #1e1e1e;
-
-  .preview-header {
-    background: linear-gradient(135deg, #434343 0%, #2b2b2b 100%);
-  }
-
-  .preview-sidebar {
-    background: linear-gradient(180deg, #2d2d2d 0%, #252525 100%);
-  }
-
-  .preview-content {
-    background: #1e1e1e;
-  }
+  --preview-bg: #1e1e1e;
+  --preview-header-start: #434343;
+  --preview-header-end: #2b2b2b;
+  --preview-sidebar-start: #2d2d2d;
+  --preview-sidebar-end: #252525;
+  --preview-content-bg: #1e1e1e;
 }
 
 .preview-dracula {
-  background: #282a36;
-
-  .preview-header {
-    background: linear-gradient(135deg, #6272a4 0%, #44475a 100%);
-  }
-
-  .preview-sidebar {
-    background: linear-gradient(180deg, #282a36 0%, #21222c 100%);
-  }
-
-  .preview-content {
-    background: #282a36;
-  }
+  --preview-bg: #282a36;
+  --preview-header-start: #6272a4;
+  --preview-header-end: #44475a;
+  --preview-sidebar-start: #282a36;
+  --preview-sidebar-end: #21222c;
+  --preview-content-bg: #282a36;
 }
 
 .theme-info {
@@ -172,12 +165,12 @@
     font-size: 18px;
     font-weight: 600;
     margin: 0 0 6px 0;
-    color: #333;
+    color: var(--text-primary, #333333);
   }
 
   p {
     font-size: 14px;
-    color: #666;
+    color: var(--text-secondary, #666666);
     margin: 0;
   }
 }
@@ -188,7 +181,7 @@
   right: 24px;
   width: 32px;
   height: 32px;
-  background: #007aff;
+  background: var(--accent-color, #007aff);
   border-radius: 50%;
   display: flex;
   align-items: center;
