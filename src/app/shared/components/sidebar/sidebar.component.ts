@@ -43,34 +43,7 @@ export class SidebarComponent implements OnInit {
         { icon: 'person', label: 'Settings', route: '/admin/settings' },
         { icon: 'person', label: 'Roles', route: '/admin/roles' },
         { icon: 'person', label: 'Permissions', route: '/admin/permissions' },
-        {
-          icon: 'person', label: 'Users', route: '',
-          children: [
-            { icon: 'person', label: 'UserSubMenu1', route: '/users/submenu.1' },
-            { icon: 'person', label: 'UserSubMenu2', route: '/users/submenu.2' },
-            { icon: 'person', label: 'UserSubMenu3', route: '', children:
-              [
-                { icon: 'person', label: 'UserSubMenu3-1', route: '', children:
-                  [
-                    { icon: 'person', label: 'UserSubMenu3-1-1', route: '', children:
-                      [
-                        { icon: 'person', label: 'Level5-Item1', route: '/users/Level5-Item1' },
-                        { icon: 'person', label: 'Level5-Item2', route: '', children:
-                          [
-                            { icon: 'person', label: 'Level6-Item1', route: '/users/Level6-Item1' },
-                            { icon: 'person', label: 'Level6-Item2', route: '/users/Level6-Item2' },
-                          ]
-                        },
-                      ]
-                    },
-                    { icon: 'person', label: 'UserSubMenu3-1-2', route: '/users/submenu.3.1.2' },
-                  ]
-                },
-                { icon: 'person', label: 'UserSubMenu3-2', route: '/users/submenu.3.2' },
-              ]
-            },
-          ]
-        },
+        { icon: 'person', label: 'Users', route: '/admin/users' },
       ]
     },
     {

@@ -128,35 +128,35 @@ describe('SidebarComponent', () => {
     expect(component.menuItems.length).toBeGreaterThan(0);
   });
 
-  it('should have deeply nested menu structure', () => {
-    const adminMenu = component.menuItems.find(item => item.label === 'Admin');
-    expect(adminMenu).toBeDefined();
+  // it('should have deeply nested menu structure', () => {
+  //   const adminMenu = component.menuItems.find(item => item.label === 'Admin');
+  //   expect(adminMenu).toBeDefined();
 
-    const usersMenu = adminMenu?.children?.find((child: any) => child.label === 'Users');
-    expect(usersMenu).toBeDefined();
+  //   const usersMenu = adminMenu?.children?.find((child: any) => child.label === 'Users');
+  //   expect(usersMenu).toBeDefined();
 
-    const userSubMenu3 = usersMenu?.children?.find((child: any) => child.label === 'UserSubMenu3');
-    expect(userSubMenu3).toBeDefined();
-    expect(userSubMenu3?.children).toBeDefined();
-    expect(userSubMenu3?.children?.length).toBeGreaterThan(0);
-  });
+  //   const userSubMenu3 = usersMenu?.children?.find((child: any) => child.label === 'UserSubMenu3');
+  //   expect(userSubMenu3).toBeDefined();
+  //   expect(userSubMenu3?.children).toBeDefined();
+  //   expect(userSubMenu3?.children?.length).toBeGreaterThan(0);
+  // });
 
-  it('should support 5+ levels of nesting', () => {
-    const adminMenu = component.menuItems.find(item => item.label === 'Admin');
-    const usersMenu = adminMenu?.children?.find((child: any) => child.label === 'Users');
-    const userSubMenu3 = usersMenu?.children?.find((child: any) => child.label === 'UserSubMenu3');
-    const userSubMenu31 = userSubMenu3?.children?.find((child: any) => child.label === 'UserSubMenu3-1');
-    const userSubMenu311 = userSubMenu31?.children?.find((child: any) => child.label === 'UserSubMenu3-1-1');
+  // it('should support 5+ levels of nesting', () => {
+  //   const adminMenu = component.menuItems.find(item => item.label === 'Admin');
+  //   const usersMenu = adminMenu?.children?.find((child: any) => child.label === 'Users');
+  //   const userSubMenu3 = usersMenu?.children?.find((child: any) => child.label === 'UserSubMenu3');
+  //   const userSubMenu31 = userSubMenu3?.children?.find((child: any) => child.label === 'UserSubMenu3-1');
+  //   const userSubMenu311 = userSubMenu31?.children?.find((child: any) => child.label === 'UserSubMenu3-1-1');
 
-    expect(userSubMenu311).toBeDefined();
-    expect(userSubMenu311?.children).toBeDefined();
+  //   expect(userSubMenu311).toBeDefined();
+  //   expect(userSubMenu311?.children).toBeDefined();
 
-    // Check for 6th level
-    const level5Item2 = userSubMenu311?.children?.find((child: any) => child.label === 'Level5-Item2');
-    expect(level5Item2).toBeDefined();
-    expect(level5Item2?.children).toBeDefined();
-    expect(level5Item2?.children?.length).toBeGreaterThan(0);
-  });
+  //   // Check for 6th level
+  //   const level5Item2 = userSubMenu311?.children?.find((child: any) => child.label === 'Level5-Item2');
+  //   expect(level5Item2).toBeDefined();
+  //   expect(level5Item2?.children).toBeDefined();
+  //   expect(level5Item2?.children?.length).toBeGreaterThan(0);
+  // });
 
   it('should have correct menu structure for Events', () => {
     const eventsMenu = component.menuItems.find(item => item.label === 'Events');

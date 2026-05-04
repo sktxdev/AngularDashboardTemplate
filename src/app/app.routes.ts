@@ -44,35 +44,6 @@ export const routes: Routes = [
         component: UsersComponent
       },
       {
-        path: 'users/submenu.1',
-        component: UsersComponent
-      },
-      {
-        path: 'users/submenu.2',
-        component: UsersComponent
-      },
-      {
-        path: 'users/Level5-Item1',
-        component: UsersComponent
-      },
-      {
-        path: 'users/Level6-Item1',
-        component: UsersComponent
-      },
-      {
-        path: 'users/Level6-Item2',
-        component: UsersComponent
-      },
-      {
-        path: 'users/submenu.3.1.2',
-        component: UsersComponent
-      },
-      {
-        path: 'users/submenu.3.2',
-        component: UsersComponent
-      },
-
-      {
         path: 'admin',
         component: AdminComponent
       },
@@ -87,6 +58,10 @@ export const routes: Routes = [
       {
         path: 'admin/permissions',
         component: PermissionsComponent
+      },
+      {
+        path: 'admin/users',
+        component: UsersComponent
       },
       {
         path: 'about',
