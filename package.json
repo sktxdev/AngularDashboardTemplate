@@ -27,8 +27,6 @@
     "@angular/platform-browser": "^21.2.8",
     "@angular/router": "^21.2.8",
     "dexie": "^4.2.1",
-    "highcharts": "^11.4.0",
-    "highcharts-angular": "^4.0.0",
     "rxdb": "^17.1.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.6.0",

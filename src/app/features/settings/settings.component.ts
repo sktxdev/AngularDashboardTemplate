@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-
 import { FormsModule } from '@angular/forms';
+import { AppConfigService } from '../../config/app.config.service';
 
 @Component({
   selector: 'app-settings',
@@ -18,11 +18,13 @@ export class SettingsComponent implements OnInit {
 
   selectedTheme: string = 'dracula';
 
-  constructor() { }
+  constructor(private configService: AppConfigService) { }
 
   ngOnInit(): void {
     // Load saved theme from localStorage
-    const savedTheme = localStorage.getItem('angularDashboardTemplate.selectedTheme');
+    const savedTheme = localStorage.getItem(
+      `${this.configService.localStorageNamespace}.selectedTheme`
+    );
     if (savedTheme) {
       this.selectedTheme = savedTheme;
     }
@@ -32,7 +34,10 @@ export class SettingsComponent implements OnInit {
   selectTheme(themeId: string): void {
     this.selectedTheme = themeId;
     this.applyTheme(themeId);
-    localStorage.setItem('angularDashboardTemplate.selectedTheme', themeId);
+    localStorage.setItem(
+      `${this.configService.localStorageNamespace}.selectedTheme`,
+      themeId
+    );
   }
 
   onThemeChange(event: Event): void {

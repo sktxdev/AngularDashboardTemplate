@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { AppConfigService } from './config/app.config.service';
 
 @Component({
   selector: 'app-root',
@@ -9,12 +10,18 @@ import { RouterOutlet } from '@angular/router';
   imports: [RouterOutlet]
 })
 export class AppComponent implements OnInit {
-  title = 'Dashboard Demo';
+  title = '';
+
+  constructor(private configService: AppConfigService) {
+    this.title = this.configService.appTitle;
+  }
 
   ngOnInit(): void {
     // Initialize theme on app launch/reload
-    const savedTheme = localStorage.getItem('angularDashboardTemplate.selectedTheme');
-    const themeToApply = savedTheme || 'dracula';
+    const savedTheme = localStorage.getItem(
+      `${this.configService.localStorageNamespace}.selectedTheme`
+    );
+    const themeToApply = savedTheme || this.configService.defaultTheme;
     this.applyTheme(themeToApply);
   }
 

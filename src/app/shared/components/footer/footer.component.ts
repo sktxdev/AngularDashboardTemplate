@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDividerModule } from '@angular/material/divider';
+import { AppConfigService } from '../../../config/app.config.service';
 
 @Component({
   selector: 'app-footer',
@@ -9,8 +10,9 @@ import { MatDividerModule } from '@angular/material/divider';
   imports: [MatDividerModule]
 })
 export class FooterComponent implements OnInit {
+  currentYear: number = new Date().getFullYear();
 
-  constructor() { }
+  constructor(public configService: AppConfigService) { }
 
   ngOnInit(): void {
   }

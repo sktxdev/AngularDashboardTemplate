@@ -1,27 +1,28 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SettingsComponent } from './settings.component';
+import { AppConfigService } from '../../config/app.config.service';
 
 describe('SettingsComponent', () => {
   let component: SettingsComponent;
   let fixture: ComponentFixture<SettingsComponent>;
-  const storageKey = 'angularDashboardTemplate.selectedTheme';
+  let configService: AppConfigService;
 
   beforeEach(async () => {
-    // Clear localStorage before each test
     localStorage.clear();
 
     await TestBed.configureTestingModule({
-      imports: [SettingsComponent]
+      imports: [SettingsComponent],
+      providers: [AppConfigService]
     })
     .compileComponents();
 
+    configService = TestBed.inject(AppConfigService);
     fixture = TestBed.createComponent(SettingsComponent);
     component = fixture.componentInstance;
   });
 
   afterEach(() => {
-    // Clean up localStorage after each test
     localStorage.clear();
   });
 
@@ -35,7 +36,7 @@ describe('SettingsComponent', () => {
   });
 
   it('should load saved theme from localStorage on init', () => {
-    localStorage.setItem(storageKey, 'dark');
+    localStorage.setItem(`${configService.localStorageNamespace}.selectedTheme`, 'dark');
     fixture.detectChanges();
 
     expect(component.selectedTheme).toBe('dark');
@@ -52,7 +53,7 @@ describe('SettingsComponent', () => {
 
     component.selectTheme('dracula');
 
-    expect(localStorage.getItem(storageKey)).toBe('dracula');
+    expect(localStorage.getItem(`${configService.localStorageNamespace}.selectedTheme`)).toBe('dracula');
     expect(component.selectedTheme).toBe('dracula');
   });
 
@@ -86,7 +87,7 @@ describe('SettingsComponent', () => {
     component.onThemeChange(mockEvent);
 
     expect(component.selectedTheme).toBe('dracula');
-    expect(localStorage.getItem(storageKey)).toBe('dracula');
+    expect(localStorage.getItem(`${configService.localStorageNamespace}.selectedTheme`)).toBe('dracula');
   });
 
   it('should have correct theme definitions', () => {

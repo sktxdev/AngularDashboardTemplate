@@ -3,6 +3,14 @@ const path = require('path');
 const url = require('url');
 let mainWindow;
 
+// Electron configuration — override these in your project
+const ELECTRON_CONFIG = {
+  appId: 'com.yourdomain.app',
+  productName: 'Dashboard App',
+  // Update the loadFile path to match your project name in angular.json
+  distPath: 'dist/angular-dashboard1/browser/index.html'
+};
+
 function createWindow() {
   mainWindow = new BrowserWindow({
     width: 1200,
@@ -27,7 +35,7 @@ function createWindow() {
   // mainWindow.webContents.openDevTools();
 
   // Production
-  // mainWindow.loadFile(path.join(__dirname, 'dist/angulardashboard1/browser/index.html'));
+  // mainWindow.loadFile(path.join(__dirname, ELECTRON_CONFIG.distPath));
 
   mainWindow.on('closed', () => mainWindow = null);
 }
@@ -52,7 +60,7 @@ app.whenReady().then(() => {
 
 });
 
-app.on('window-all-closed', () => {
+app.on('window-all-hidden', () => {
     // Unregister all global shortcuts
     globalShortcut.unregisterAll();
 

@@ -48,7 +48,7 @@ export const routes: Routes = [
         component: AdminComponent
       },
       {
-        path: 'admin/settings',
+        path: 'settings',
         component: SettingsComponent
       },
       {

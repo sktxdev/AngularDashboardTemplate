@@ -1,13 +1,16 @@
 import { TestBed } from '@angular/core/testing';
 import { UserService } from './user.service';
 import { DatabaseService } from './database.service';
+import { AppConfigService } from '../../../config/app.config.service';
 
 describe('UserService', () => {
   let service: UserService;
   let dbService: DatabaseService;
 
   beforeEach(async () => {
-    TestBed.configureTestingModule({});
+    TestBed.configureTestingModule({
+      providers: [AppConfigService]
+    });
     service = TestBed.inject(UserService);
     dbService = TestBed.inject(DatabaseService);
   });

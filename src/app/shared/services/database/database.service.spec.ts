@@ -1,11 +1,16 @@
 import { TestBed } from '@angular/core/testing';
 import { DatabaseService } from './database.service';
+import { AppConfigService } from '../../../config/app.config.service';
 
 describe('DatabaseService', () => {
   let service: DatabaseService;
+  let configService: AppConfigService;
 
   beforeEach(async () => {
-    TestBed.configureTestingModule({});
+    TestBed.configureTestingModule({
+      providers: [AppConfigService]
+    });
+    configService = TestBed.inject(AppConfigService);
     service = TestBed.inject(DatabaseService);
   });
 
@@ -24,7 +29,7 @@ describe('DatabaseService', () => {
   it('should initialize database', async () => {
     const db = await service.getDatabase();
     expect(db).toBeTruthy();
-    expect(db.name).toBe('angulardashboard');
+    expect(db.name).toBe(configService.databaseName);
   });
 
   it('should return same database instance on multiple calls', async () => {

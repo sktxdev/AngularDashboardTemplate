@@ -2,19 +2,22 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
 
 import { SidebarComponent } from './sidebar.component';
+import { AppConfigService } from '../../../config/app.config.service';
 
 describe('SidebarComponent', () => {
   let component: SidebarComponent;
   let fixture: ComponentFixture<SidebarComponent>;
-  const storageKey = 'angularDashboardTemplate.currentNavWidth';
+  let configService: AppConfigService;
 
   beforeEach(async () => {
-    // Clear localStorage before each test
     localStorage.clear();
 
     await TestBed.configureTestingModule({
       imports: [ SidebarComponent ],
-      providers: [ provideRouter([]) ]
+      providers: [
+        provideRouter([]),
+        AppConfigService
+      ]
     })
     .compileComponents();
   });
@@ -22,11 +25,11 @@ describe('SidebarComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(SidebarComponent);
     component = fixture.componentInstance;
+    configService = TestBed.inject(AppConfigService);
     fixture.detectChanges();
   });
 
   afterEach(() => {
-    // Clean up localStorage and body classes after each test
     localStorage.clear();
     document.body.classList.remove('resizing');
   });
@@ -40,7 +43,7 @@ describe('SidebarComponent', () => {
   });
 
   it('should load saved width from localStorage on init', () => {
-    localStorage.setItem(storageKey, '300');
+    localStorage.setItem(`${configService.localStorageNamespace}.currentNavWidth`, '300');
 
     const newFixture = TestBed.createComponent(SidebarComponent);
     const newComponent = newFixture.componentInstance;
@@ -50,7 +53,7 @@ describe('SidebarComponent', () => {
   });
 
   it('should not load width if it is below minimum', () => {
-    localStorage.setItem(storageKey, '100');
+    localStorage.setItem(`${configService.localStorageNamespace}.currentNavWidth`, '100');
 
     const newFixture = TestBed.createComponent(SidebarComponent);
     const newComponent = newFixture.componentInstance;
@@ -60,7 +63,7 @@ describe('SidebarComponent', () => {
   });
 
   it('should not load width if it is above maximum', () => {
-    localStorage.setItem(storageKey, '600');
+    localStorage.setItem(`${configService.localStorageNamespace}.currentNavWidth`, '600');
 
     const newFixture = TestBed.createComponent(SidebarComponent);
     const newComponent = newFixture.componentInstance;
@@ -118,7 +121,7 @@ describe('SidebarComponent', () => {
 
     component.onMouseUp();
 
-    expect(localStorage.getItem(storageKey)).toBe('320');
+    expect(localStorage.getItem(`${configService.localStorageNamespace}.currentNavWidth`)).toBe('320');
     expect(component.isResizing).toBeFalsy();
     expect(document.body.classList.contains('resizing')).toBeFalsy();
   });
@@ -180,7 +183,7 @@ describe('SidebarComponent', () => {
 
     component.onMouseUp();
 
-    expect(localStorage.getItem(storageKey)).toBeNull();
+    expect(localStorage.getItem(`${configService.localStorageNamespace}.currentNavWidth`)).toBeNull();
   });
 
   it('should call updateSidebarWidth when width changes during resize', () => {
@@ -221,7 +224,7 @@ describe('SidebarComponent', () => {
     const usersMenu = adminMenu?.children?.find((child: any) => child.label === 'Users');
 
     expect(settingsMenu).toBeDefined();
-    expect(settingsMenu?.route).toBe('/admin/settings');
+    expect(settingsMenu?.route).toBe('/settings');
     expect(rolesMenu).toBeDefined();
     expect(rolesMenu?.route).toBe('/admin/roles');
     expect(permissionsMenu).toBeDefined();
@@ -280,7 +283,7 @@ describe('SidebarComponent', () => {
   });
 
   it('should load width from localStorage at boundary values', () => {
-    localStorage.setItem(storageKey, '150');
+    localStorage.setItem(`${configService.localStorageNamespace}.currentNavWidth`, '150');
 
     const newFixture = TestBed.createComponent(SidebarComponent);
     const newComponent = newFixture.componentInstance;
@@ -290,7 +293,7 @@ describe('SidebarComponent', () => {
   });
 
   it('should load maximum width from localStorage', () => {
-    localStorage.setItem(storageKey, '500');
+    localStorage.setItem(`${configService.localStorageNamespace}.currentNavWidth`, '500');
 
     const newFixture = TestBed.createComponent(SidebarComponent);
     const newComponent = newFixture.componentInstance;
@@ -300,7 +303,7 @@ describe('SidebarComponent', () => {
   });
 
   it('should handle invalid localStorage value gracefully', () => {
-    localStorage.setItem(storageKey, 'invalid');
+    localStorage.setItem(`${configService.localStorageNamespace}.currentNavWidth`, 'invalid');
 
     const newFixture = TestBed.createComponent(SidebarComponent);
     const newComponent = newFixture.componentInstance;
@@ -410,7 +413,7 @@ describe('SidebarComponent', () => {
   });
 
   it('should handle empty localStorage value', () => {
-    localStorage.setItem(storageKey, '');
+    localStorage.setItem(`${configService.localStorageNamespace}.currentNavWidth`, '');
 
     const newFixture = TestBed.createComponent(SidebarComponent);
     const newComponent = newFixture.componentInstance;
@@ -420,7 +423,7 @@ describe('SidebarComponent', () => {
   });
 
   it('should handle NaN from parseInt', () => {
-    localStorage.setItem(storageKey, 'abc123');
+    localStorage.setItem(`${configService.localStorageNamespace}.currentNavWidth`, 'abc123');
 
     const newFixture = TestBed.createComponent(SidebarComponent);
     const newComponent = newFixture.componentInstance;
@@ -431,6 +434,10 @@ describe('SidebarComponent', () => {
 
   it('should inject ElementRef in constructor', () => {
     expect(component['elementRef']).toBeDefined();
+  });
+
+  it('should inject AppConfigService in constructor', () => {
+    expect(component['configService']).toBeDefined();
   });
 
   it('should not update width when new width equals MIN_WIDTH minus 1', () => {
@@ -462,7 +469,6 @@ describe('SidebarComponent', () => {
   });
 
   it('should have correct private constants', () => {
-    expect(component['STORAGE_KEY']).toBe('angularDashboardTemplate.currentNavWidth');
     expect(component['MIN_WIDTH']).toBe(150);
     expect(component['MAX_WIDTH']).toBe(500);
     expect(component['DEFAULT_WIDTH']).toBe(250);

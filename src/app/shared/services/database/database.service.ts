@@ -6,6 +6,7 @@ import { RxDBQueryBuilderPlugin } from 'rxdb/plugins/query-builder';
 import { RxDBUpdatePlugin } from 'rxdb/plugins/update';
 import { wrappedValidateAjvStorage } from 'rxdb/plugins/validate-ajv';
 import { environment } from '../../../../environments/environment';
+import { AppConfigService } from '../../../config/app.config.service';
 
 // Add plugins in development mode
 if (!environment.production) {
@@ -71,7 +72,7 @@ export class DatabaseService {
   private db: MyDatabase | null = null;
   private initPromise: Promise<MyDatabase> | null = null;
 
-  constructor() {}
+  constructor(private configService: AppConfigService) {}
 
   async getDatabase(): Promise<MyDatabase> {
     if (this.db) {
@@ -91,7 +92,7 @@ export class DatabaseService {
     console.log('Initializing RxDB database...');
 
     const db = await createRxDatabase<MyDatabaseCollections>({
-      name: 'angulardashboard',
+      name: this.configService.databaseName,
       storage: wrappedValidateAjvStorage({
         storage: getRxStorageDexie()
       }),

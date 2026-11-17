@@ -1,25 +1,27 @@
 /// <reference types="jasmine" />
 import { TestBed } from '@angular/core/testing';
-import { RouterTestingModule } from '@angular/router/testing';
+import { provideRouter } from '@angular/router';
 import { AppComponent } from './app.component';
+import { AppConfigService } from './config/app.config.service';
 
 describe('AppComponent', () => {
-  const storageKey = 'angularDashboardTemplate.selectedTheme';
+  let configService: AppConfigService;
 
   beforeEach(async () => {
-    // Clear localStorage before each test
     localStorage.clear();
 
     await TestBed.configureTestingModule({
-      imports: [
-        AppComponent,
-        RouterTestingModule
+      imports: [AppComponent],
+      providers: [
+        provideRouter([]),
+        AppConfigService
       ]
     }).compileComponents();
+
+    configService = TestBed.inject(AppConfigService);
   });
 
   afterEach(() => {
-    // Clean up localStorage after each test
     localStorage.clear();
   });
 
@@ -43,7 +45,7 @@ describe('AppComponent', () => {
   });
 
   it('should apply saved theme from localStorage on init', () => {
-    localStorage.setItem(storageKey, 'light');
+    localStorage.setItem(`${configService.localStorageNamespace}.selectedTheme`, 'light');
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
 
@@ -52,7 +54,7 @@ describe('AppComponent', () => {
   });
 
   it('should remove previous theme class when applying new theme', () => {
-    localStorage.setItem(storageKey, 'dark');
+    localStorage.setItem(`${configService.localStorageNamespace}.selectedTheme`, 'dark');
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
 
@@ -61,11 +63,9 @@ describe('AppComponent', () => {
     expect(document.body.classList.contains('theme-light')).toBeFalsy();
   });
 
-  // it('should render title', () => {
-  //   const fixture = TestBed.createComponent(AppComponent);
-  //   fixture.detectChanges();
-  //   const compiled = fixture.nativeElement as HTMLElement;
-  //   console.log(compiled);
-  //   expect(compiled.querySelector('.content span')?.textContent).toContain('router-outlet');
-  // });
+  it('should inject AppConfigService', () => {
+    const fixture = TestBed.createComponent(AppComponent);
+    const app = fixture.componentInstance;
+    expect(app['configService']).toBeDefined();
+  });
 });
