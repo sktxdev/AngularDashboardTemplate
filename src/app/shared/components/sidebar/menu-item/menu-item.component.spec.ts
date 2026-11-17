@@ -1,7 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
 
-import { MenuItemComponent, MenuItem } from './menu-item.component';
+import { MenuItemComponent } from './menu-item.component';
+import { MenuItem } from '../../../../config/app.config.model';
 
 describe('MenuItemComponent', () => {
   let component: MenuItemComponent;

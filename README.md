@@ -110,6 +110,10 @@ src/app/
 └── shared/                 # Reusable components and services
 ```
 
+## Dynamic menu test - temp code
+
+http://localhost:4200/menu-demo
+
 See `CLAUDE.md` for detailed architecture documentation.
 
 ## License

@@ -7,7 +7,7 @@
     <div class="nav-section">
       <h3>Navigation</h3>
       <ul class="nav-list">
-        @for (item of menuItems; track item) {
+        @for (item of configService.menuItems(); track item) {
           <li>
             <app-menu-item [item]="item" [level]="0"></app-menu-item>
           </li>

@@ -1,7 +1,6 @@
-import { Component, OnInit, HostListener, ElementRef } from '@angular/core';
+import { Component, HostListener, ElementRef } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { AppConfigService } from '../../../config/app.config.service';
-import { MenuItem } from '../../../config/app.config.model';
 import { MenuItemComponent } from './menu-item/menu-item.component';
 
 @Component({
@@ -14,7 +13,7 @@ import { MenuItemComponent } from './menu-item/menu-item.component';
     MenuItemComponent
   ]
 })
-export class SidebarComponent implements OnInit {
+export class SidebarComponent {
   private readonly MIN_WIDTH = 150;
   private readonly MAX_WIDTH = 500;
   private readonly DEFAULT_WIDTH = 250;
@@ -24,15 +23,12 @@ export class SidebarComponent implements OnInit {
   private startX: number = 0;
   private startWidth: number = 0;
 
-  menuItems: MenuItem[] = [];
-
   constructor(
     private elementRef: ElementRef,
     public configService: AppConfigService
   ) { }
 
   ngOnInit(): void {
-    this.menuItems = this.configService.menuItems;
     // Load saved width from localStorage
     const savedWidth = localStorage.getItem(
       `${this.configService.localStorageNamespace}.currentNavWidth`

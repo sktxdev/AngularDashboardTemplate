@@ -1,14 +1,7 @@
 import { Component, Input } from '@angular/core';
-
 import { MatIconModule } from '@angular/material/icon';
 import { RouterLink, RouterLinkActive } from '@angular/router';
-
-export interface MenuItem {
-  icon: string;
-  label: string;
-  route: string;
-  children?: MenuItem[];
-}
+import { MenuItem } from '../../../../config/app.config.model';
 
 @Component({
   selector: 'app-menu-item',

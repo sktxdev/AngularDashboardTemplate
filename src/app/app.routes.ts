@@ -13,6 +13,7 @@ import { SoftwareComponent } from './features/about/software/software.component'
 import { EventsSubmenu2Component } from './features/events/events-submenu-2/events-submenu-2.component';
 import { EventsSubmenu1Component } from './features/events/events-submenu-1/events-submenu-1.component';
 import { EventsSubmenu3Component } from './features/events/events-submenu-3/events-submenu-3.component';
+import { MenuDemoComponent } from './features/menu-demo/menu-demo.component';
 
 export const routes: Routes = [
   {
@@ -74,6 +75,10 @@ export const routes: Routes = [
       {
         path: 'about/software',
         component: SoftwareComponent
+      },
+      {
+        path: 'menu-demo',
+        component: MenuDemoComponent
       }
     ]
   }
